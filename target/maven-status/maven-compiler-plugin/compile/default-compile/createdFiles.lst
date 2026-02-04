@@ -3,6 +3,7 @@ com/retailops/repository/CartRepository.class
 com/retailops/RetailOpsApplication.class
 com/retailops/controller/AuthController.class
 com/retailops/controller/ProductController.class
+com/retailops/config/SecurityConfig.class
 com/retailops/controller/CartController.class
 com/retailops/entity/User.class
 com/retailops/entity/CartItem.class

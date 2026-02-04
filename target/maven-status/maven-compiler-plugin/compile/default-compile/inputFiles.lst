@@ -1,6 +1,7 @@
 /Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/repository/CartRepository.java
 /Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/entity/Product.java
 /Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/controller/AuthController.java
+/Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/config/SecurityConfig.java
 /Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/controller/ProductController.java
 /Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/RetailOpsApplication.java
 /Users/surya/Desktop/retailops-backend/src/main/java/com/retailops/repository/ProductRepository.java
