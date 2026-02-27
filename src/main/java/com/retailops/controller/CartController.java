@@ -1,27 +1,51 @@
 package com.retailops.controller;
 
-import java.util.List;
+import com.retailops.entity.CartItem;
+import com.retailops.entity.Product;
+import com.retailops.repository.CartItemRepository;
+import com.retailops.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.retailops.entity.CartItem;
-import com.retailops.repository.CartRepository;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
 public class CartController {
 
     @Autowired
-    private CartRepository cartRepository;
+    private CartItemRepository cartItemRepository;
 
-    @GetMapping("/{userId}")
-    public List<CartItem> getCart(@PathVariable Long userId) {
-        return cartRepository.findByUserId(userId);
+    @Autowired
+    private ProductRepository productRepository;
+
+    // Get all cart items
+    @GetMapping
+    public List<CartItem> getCartItems() {
+        return cartItemRepository.findAll();
     }
 
-    @PostMapping
-    public CartItem addToCart(@RequestBody CartItem item) {
-        return cartRepository.save(item);
+    // Add item to cart
+    @PostMapping("/add")
+    public CartItem addToCart(@RequestParam Long productId,
+                              @RequestParam int quantity) {
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        CartItem cartItem = new CartItem();
+        cartItem.setProduct(product);
+        cartItem.setQuantity(quantity);
+
+        return cartItemRepository.save(cartItem);
+    }
+
+    // Remove item from cart
+    @DeleteMapping("/{id}")
+    public String removeFromCart(@PathVariable Long id) {
+
+        cartItemRepository.deleteById(id);
+        return "Item removed from cart";
     }
 }
