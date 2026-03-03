@@ -8,8 +8,10 @@ import com.retailops.repository.OrderRepository;
 import com.retailops.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -25,17 +27,20 @@ public class OrderController {
     @Autowired
     private ProductRepository productRepository;
 
-    // Get all orders
+    // Get logged-in user's order history
     @GetMapping
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<Order> getUserOrders(Authentication authentication) {
+        String username = authentication.getName();
+        return orderRepository.findByUsername(username);
     }
 
-    // Place order from cart
+    // Checkout logged-in user's cart
     @PostMapping("/checkout")
-    public String checkout() {
+    public String checkout(Authentication authentication) {
 
-        List<CartItem> cartItems = cartItemRepository.findAll();
+        String username = authentication.getName();
+
+        List<CartItem> cartItems = cartItemRepository.findByUsername(username);
 
         if (cartItems.isEmpty()) {
             return "Cart is empty";
@@ -49,20 +54,19 @@ public class OrderController {
                 return "Insufficient stock for product: " + product.getName();
             }
 
-            // Reduce stock
             product.setStock(product.getStock() - item.getQuantity());
             productRepository.save(product);
 
-            // Create order
             Order order = new Order();
+            order.setUsername(username);
             order.setProduct(product);
             order.setQuantity(item.getQuantity());
+            order.setOrderTime(LocalDateTime.now());
 
             orderRepository.save(order);
         }
 
-        // Clear cart
-        cartItemRepository.deleteAll();
+        cartItemRepository.deleteAll(cartItems);
 
         return "Order placed successfully";
     }
