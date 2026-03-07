@@ -78,4 +78,12 @@ public Page<Product> getAllProducts(
     public List<Product> searchProducts(@RequestParam String keyword) {
         return productRepository.findByNameContainingIgnoreCase(keyword);
     }
+
+    @GetMapping("/low-stock")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Product> getLowStockProducts(
+        @RequestParam(defaultValue = "5") int threshold) {
+
+    return productRepository.findByStockLessThan(threshold);
+    }
 }
