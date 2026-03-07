@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -20,13 +21,18 @@ public class ProductController {
     private ProductRepository productRepository;
 
     // Public - anyone can view products
-    @GetMapping
-    public Page<Product> getAllProducts(
+@GetMapping
+public Page<Product> getAllProducts(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "5") int size
-    ) {
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "id") String sortBy
+) {
 
-    Pageable pageable = PageRequest.of(page, size);
+    Pageable pageable = PageRequest.of(
+            page,
+            size,
+            Sort.by(sortBy).ascending()
+    );
 
     return productRepository.findAll(pageable);
 }
