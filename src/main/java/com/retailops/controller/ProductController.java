@@ -73,4 +73,9 @@ public Page<Product> getAllProducts(
         productRepository.deleteById(id);
         return "Product deleted successfully";
     }
+
+    @GetMapping("/search")
+    public List<Product> searchProducts(@RequestParam String keyword) {
+        return productRepository.findByNameContainingIgnoreCase(keyword);
+    }
 }
