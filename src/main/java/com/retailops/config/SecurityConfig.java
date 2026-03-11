@@ -1,6 +1,7 @@
 package com.retailops.config;
 
 import com.retailops.security.JwtAuthenticationFilter;
+import com.retailops.security.RateLimitFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
+
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
@@ -22,6 +24,8 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtFilter;
 
+    @Autowired
+    private RateLimitFilter rateLimitFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -55,4 +59,5 @@ public class SecurityConfig {
             AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+    
 }
