@@ -1,18 +1,27 @@
 # RetailOps Backend Platform
 
-A scalable backend platform for **Cart, Orders, and Inventory management** built using **Spring Boot**.
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.x-brightgreen)
+![Docker](https://img.shields.io/badge/Docker-enabled-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+A scalable backend platform for **Cart, Orders, and Inventory Management** built using **Spring Boot**.
+
+This project demonstrates a **production-style backend architecture** with authentication, inventory management, admin analytics, and Docker deployment.
 
 ---
 
-## Features
+# Features
 
-- JWT Authentication & Role-Based Access Control
+- JWT Authentication
+- Role-Based Access Control
 - Product Catalog Management
-- Cart Management System
+- Cart Management
 - Order Processing
-- Inventory Stock Management
+- Inventory Management
 - Admin Dashboard APIs
-- Pagination, Sorting, and Search APIs
+- Pagination & Sorting APIs
+- Product Search API
 - Inventory Audit Logging
 - API Rate Limiting
 - Swagger API Documentation
@@ -20,72 +29,80 @@ A scalable backend platform for **Cart, Orders, and Inventory management** built
 
 ---
 
-## Tech Stack
+# Tech Stack
 
-- Java 17
-- Spring Boot
-- Spring Security
-- JWT Authentication
-- Spring Data JPA
-- H2 Database
-- Docker
-- Maven
+| Technology | Purpose |
+|------------|--------|
+| Java 17 | Backend language |
+| Spring Boot | Application framework |
+| Spring Security | Authentication & authorization |
+| JWT | Token-based security |
+| Spring Data JPA | Database ORM |
+| H2 Database | Development database |
+| Maven | Dependency management |
+| Docker | Containerization |
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 src/main/java/com/retailops
 
-config          # Security and Swagger configuration
-controller      # REST API controllers
-dto             # Data Transfer Objects
-entity          # JPA entities
-repository      # Database repositories
-security        # JWT & rate limiting filters
-service         # Business logic layer
+config          Security & Swagger configuration
+controller      REST API controllers
+dto             Data Transfer Objects
+entity          Database entities
+repository      JPA repositories
+security        JWT & rate limiting filters
+service         Business logic
 ```
 
 ---
 
-## API Endpoints
+# API Endpoints
 
-### Product APIs
+## Product APIs
 
-```
-GET /products
-GET /products/search?keyword=laptop
-GET /products/low-stock
-POST /products
-```
-
-### Cart APIs
-
-```
-GET /cart
-POST /cart/add
-DELETE /cart/remove
-```
-
-### Order APIs
-
-```
-POST /orders/checkout
-GET /orders
-```
-
-### Admin APIs
-
-```
-GET /admin/stats/orders
-GET /admin/stats/products
-GET /admin/stats/revenue
-```
+| Method | Endpoint | Description |
+|------|---------|-------------|
+| GET | `/products` | Get all products |
+| GET | `/products/search` | Search products |
+| GET | `/products/low-stock` | Low stock products |
+| POST | `/products` | Create product |
 
 ---
 
-## Run Locally
+## Cart APIs
+
+| Method | Endpoint |
+|------|---------|
+| GET | `/cart` |
+| POST | `/cart/add` |
+| DELETE | `/cart/remove` |
+
+---
+
+## Order APIs
+
+| Method | Endpoint |
+|------|---------|
+| POST | `/orders/checkout` |
+| GET | `/orders` |
+
+---
+
+## Admin APIs
+
+| Method | Endpoint |
+|------|---------|
+| GET | `/admin/stats/orders` |
+| GET | `/admin/stats/products` |
+| GET | `/admin/stats/revenue` |
+
+---
+
+# Run Locally
 
 ### Build Project
 
@@ -99,17 +116,7 @@ mvn clean package
 mvn spring-boot:run
 ```
 
----
-
-## Run with Docker
-
-Build and run the backend container:
-
-```bash
-docker-compose up --build
-```
-
-Application will run at:
+Application runs at:
 
 ```
 http://localhost:8080
@@ -117,7 +124,15 @@ http://localhost:8080
 
 ---
 
-## API Documentation
+# Run with Docker
+
+```bash
+docker-compose up --build
+```
+
+---
+
+# API Documentation
 
 Swagger UI:
 
@@ -127,9 +142,18 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## Author
+# Future Improvements
 
-**Surya Srinivasan**
+- Payment integration
+- Redis caching
+- Kafka event processing
+- PostgreSQL production database
+- CI/CD pipeline
 
+---
+
+# Author
+
+**Surya Srinivasan**  
 Computer Science Engineering  
 VIT Vellore
