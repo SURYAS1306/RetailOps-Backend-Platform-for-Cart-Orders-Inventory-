@@ -6,4 +6,4 @@ services:
     container_name: retailops-backend
     ports:
       - "8080:8080"
-    restart: always
+    restart: always;
